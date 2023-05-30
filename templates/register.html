@@ -1,0 +1,41 @@
+{% extends "index.html" %}
+{% load crispy_forms_tags %}
+{% crispy form %} 
+{% load static %}
+{% block content %}
+       <h3 class="page-header text-primary text-center well" >
+            <i class='fa fa-id-card'>Registration</i>
+        </h3>
+    </div>
+    <div id="message" class="text-center" style="margin-top: 30px;">
+        {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'error' %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            {% else %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+       </div>
+    <div class="text-center" style="margin-top: 60px; ">
+        <form method="POST" autocomplete="off" class="well" style="width: 500px; margin-left:35%;">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <input type="submit" class="btn btn-primary btn-block" value="Register"><br><br>
+
+            <div>
+                <a href="{% url 'login' %}">Sign In Now </a>
+                </div>
+        </form>
+        
+    </div> 
+    
+    
+{% endblock %}
+
+            
